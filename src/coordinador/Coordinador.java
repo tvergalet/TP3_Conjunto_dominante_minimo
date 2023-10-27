@@ -4,6 +4,8 @@ import bd.AdmBaseDatos;
 import modelo.Logica;
 import vista.VentanaPrincipal;
 
+
+
 public class Coordinador {
 
 	private Logica logica;
