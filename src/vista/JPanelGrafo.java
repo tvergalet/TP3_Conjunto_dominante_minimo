@@ -1,138 +1,128 @@
 package vista;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JToolBar;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
 
-import coordinador.Coordinador;
 import modelo.objetos.Arista;
 import modelo.objetos.Grafo;
 import modelo.objetos.Vertice;
 
-import javax.swing.JPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+public class JPanelGrafo {
+	/**
+	 * Panel principal de la aplicación. Este panel contiene los vértices y aristas
+	 * del grafo.
+	 */
+	private static JPanel mainPanel = new JPanel();
 
-@SuppressWarnings("serial")
-public class VentanaPrincipal extends JFrame {
-
-	// private Coordinador coordinador;
-	private LineBorder lineBorder;
-	Color colorTextFont;
-	private static JPanel panelGrafo;
-	private static JLabel infoLabel;
-	// Grafo grafo;
-	private static String modo = "Agregar Vértice/Arista";
+	/**
+	 * Objeto de tipo Grafo utilizado para tener control y métricas de los vértices
+	 * y aristas. Se utiliza para realizar operaciones y obtener información sobre
+	 * el estado actual del grafo.
+	 */
 	private static final Grafo GRAFO = new Grafo();
-	private JPanelGrafo grafo;
 
-	public VentanaPrincipal(Coordinador coordinador) {
-		colorTextFont = new Color(111, 145, 173);
-		// coordinador = coord;
-		lineBorder = new LineBorder(new Color(39, 57, 88), 1, true);
-		setSize(1280, 720);
-		setTitle("Conjunto Dominante Minimo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/appIcon_32.png")));
+	/**
+	 * Etiqueta inferior que muestra información sobre el modo de la aplicación.
+	 * Proporciona indicaciones y mensajes relacionados con las acciones que se
+	 * pueden realizar.
+	 */
+	private static JLabel infoLabel;
 
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
+	/**
+	 * Modo actual de la aplicación. Representa el tipo de acción que se realizará
+	 * al interactuar con el grafo.
+	 */
+	private static String modo = "Agregar Vértice/Arista";
 
-		// Designamos los metodos para cargar la interfaz
-		crearBarraHerramientas();
-		// visorGrafo();
-		// creaMenuBar();
-		panelGrafo = new JPanel();
-		panelGrafo.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
-		panelGrafo.setBounds(20, 93, 600, 400);
-		grafo = new JPanelGrafo(panelGrafo);
-		getContentPane().add(panelGrafo);
-
+	/**
+	 * @return El panel principal de la aplicación, este panel contiene elementos
+	 *         hijos como Vértices y Aristas.
+	 */
+	public static JPanel getMainPanel() {
+		return mainPanel;
 	}
 
-	public void mostrarVentana() {
-		setVisible(true);
+	/**
+	 * @return El modo actual de la aplicación, que indica el comportamiento
+	 *         seleccionado por el usuario.
+	 */
+	public static String getModo() {
+		return modo;
 	}
 
-	public void crearBarraHerramientas() {
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBorder(new TitledBorder(lineBorder, "Barra de herramientas", TitledBorder.LEFT, TitledBorder.TOP,
-				null, colorTextFont));
-		toolBar.setBounds(10, 10, 1246, 72);
-		getContentPane().add(toolBar);
-		toolBar.addSeparator();
-
-		JButton btn_AgregarPersona = new JButton("Agregar Persona");
-		btn_AgregarPersona.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btn_AgregarPersona.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/agregarPersona32.png")));
-		btn_AgregarPersona.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getSource() == btn_AgregarPersona) {
-					VentanaAgregarPersona ventana = new VentanaAgregarPersona();
-					ventana.setVisible(true);
-
-				}
-			}
-		});
-		toolBar.add(btn_AgregarPersona);
-		toolBar.addSeparator();
-		JButton btn_AgregarRelacion = new JButton("Agregar Persona");
-		btn_AgregarRelacion.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/crearVinculo32.png")));
-		btn_AgregarRelacion.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getSource() == btn_AgregarRelacion) {
-					VentanaAgregarPersona ventana = new VentanaAgregarPersona();
-					ventana.setVisible(true);
-
-				}
-			}
-		});
-		toolBar.add(btn_AgregarRelacion);
-		toolBar.addSeparator();
-
-	}
-
-
-	public static  JPanel getPanelGrafo() {
-
-		return panelGrafo;
-
-	}
-
-	public static Grafo getGrafo() {
-		return GRAFO;
-	}
-
+	/**
+	 * @return El panel de información de la aplicación, el infoLabel le muestra
+	 *         información contextual al usuario.
+	 */
 	public static JLabel getInfoLabel() {
 		return infoLabel;
 	}
 
+	/**
+	 * @return El objeto Grafo que representa el estado actual del el grafo de la
+	 *         aplicación.
+	 */
+	public static Grafo getGrafo() {
+		return GRAFO;
+	}
+
+	/**
+	 * Constructor de la clase MainFrame. Crea la interfaz gráfica de la aplicación
+	 * y configura sus componentes. Se establecen las dimensiones, el título y el
+	 * comportamiento de la ventana.
+	 */
+
+	public JPanelGrafo(JPanel grafo) {
+
+		grafo.setSize(600, 400);
+		grafo.setBounds(20, 93, 850, 650);
+		grafo.setVisible(true);
+
+
+		//mainPanel.setName("Grafo");
+		mainPanel.setLayout(null);
+		mainPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				leeClick(e);
+			}
+		});
+		grafo.add(mainPanel);
+
+		infoLabel = new JLabel("Click en espacio vacío para añadir vértice o en vértice para añadir arista");
+		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		infoLabel.setOpaque(true);
+		infoLabel.setBorder(new EmptyBorder(7, 0, 7, 0));
+
+		infoLabel.setFont(infoLabel.getFont().deriveFont(14.8f));
+		grafo.add(infoLabel, BorderLayout.SOUTH);
+
+		creaMenuBar();
+		
+
+		grafo.setVisible(true);
+	}
+
+	/**
+	 * @return La barra de menú creada para la aplicación.
+	 */
 	private JMenuBar creaMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new BoxLayout(menuBar, BoxLayout.X_AXIS));
@@ -146,9 +136,9 @@ public class VentanaPrincipal extends JFrame {
 		limpiarItem.setName("Limpiar");
 		limpiarItem.addActionListener(e -> {
 			GRAFO.clear();
-			panelGrafo.removeAll();
-			panelGrafo.revalidate();
-			panelGrafo.repaint();
+			mainPanel.removeAll();
+			mainPanel.revalidate();
+			mainPanel.repaint();
 		});
 		fileMenu.add(limpiarItem);
 
@@ -257,60 +247,55 @@ public class VentanaPrincipal extends JFrame {
 	 * @param e El evento de click del mouse en el panel principal de la aplicación.
 	 */
 	private static void leeClick(MouseEvent e) {
-		Point click = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), panelGrafo);
-		Component component = panelGrafo.getComponentAt(click);
+		Point click = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), mainPanel);
+		Component component = mainPanel.getComponentAt(click);
 		String ID = "";
 		switch (modo) {
 		case "Agregar Vértice/Arista" -> {
 			if (!(component instanceof Vertice) && Vertice.getvOrigen() == null) {
-				ID = (String) JOptionPane.showInputDialog(panelGrafo, "Ingrese el nombre:", "Nombre del vértice",
+				ID = (String) JOptionPane.showInputDialog(mainPanel, "Ingrese el nombre:", "Nombre del vértice",
 						JOptionPane.PLAIN_MESSAGE, null, null, ID);
 				if (ID == null) {
 					break;
 				}
 				if (ID.isBlank()) {
-					JOptionPane.showMessageDialog(panelGrafo, "El nombre no puede estar vacío", "Nombre inválido",
+					JOptionPane.showMessageDialog(mainPanel, "El nombre no puede estar vacío", "Nombre inválido",
 							JOptionPane.WARNING_MESSAGE);
 				} else if (ID.length() > 3) {
-					JOptionPane.showMessageDialog(panelGrafo, "El nombre no puede tener más de 3 caracteres",
+					JOptionPane.showMessageDialog(mainPanel, "El nombre no puede tener más de 3 caracteres",
 							"Nombre muy largo", JOptionPane.WARNING_MESSAGE);
 				} else {
 					Vertice vertice = GRAFO.creaVertice(ID, e.getX(), e.getY());
 					if (vertice != null) {
-						panelGrafo.add(vertice);
-						panelGrafo.setComponentZOrder(vertice, 0);
-						panelGrafo.revalidate();
-						panelGrafo.repaint();
+						mainPanel.add(vertice);
+						mainPanel.setComponentZOrder(vertice, 0);
+						mainPanel.revalidate();
+						mainPanel.repaint();
 					} else {
-						JOptionPane.showMessageDialog(panelGrafo, "El vértice ya existe en el grafo",
-								"Vértice repetido", JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(mainPanel, "El vértice ya existe en el grafo", "Vértice repetido",
+								JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
 		}
 		case "Árbol de expansión mínima" -> {
-			int opcion = JOptionPane.showConfirmDialog(panelGrafo, "¿Quieres eliminar los aristas grises?",
+			int opcion = JOptionPane.showConfirmDialog(mainPanel, "¿Quieres eliminar los aristas grises?",
 					"Confirma eliminación", JOptionPane.YES_NO_OPTION);
 			if (opcion == JOptionPane.YES_OPTION) {
 				for (Arista arista : GRAFO.aristasInnecesarias()) {
 					arista.getOrigen().desconectaArista(arista);
 					arista.getDestino().desconectaArista(arista);
 					GRAFO.eliminaArista(arista);
-					panelGrafo.remove(arista.getPesoLabel());
-					panelGrafo.remove(arista);
-					panelGrafo.revalidate();
+					mainPanel.remove(arista.getPesoLabel());
+					mainPanel.remove(arista);
+					mainPanel.revalidate();
 				}
-				panelGrafo.repaint();
-				panelGrafo.revalidate();
+				mainPanel.repaint();
+				mainPanel.revalidate();
 			}
 		}
 		default -> {
 		}
 		}
 	}
-
-	public static String getModo() {
-		return modo;
-	}
-
 }
