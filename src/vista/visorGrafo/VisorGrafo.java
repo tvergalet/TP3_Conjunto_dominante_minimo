@@ -1,29 +1,29 @@
 package vista.visorGrafo;
 
-
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
 public class VisorGrafo {
 
-	private JPanel mainPanel;
+	private JPanel panelPrincipal;
+	private Color backgroudColor;
 
 	public VisorGrafo() {
-		mainPanel = new JPanel();
+		panelPrincipal = new JPanel();
+		backgroudColor = new Color(41, 58, 86);
 		crearPanelPrincipal();
-
 	}
 
 	private void crearPanelPrincipal() {
-		mainPanel.setLayout(null);
-		mainPanel.addMouseListener(new MouseAdapter() {
+		panelPrincipal.setLayout(null);
+		panelPrincipal.setBackground(backgroudColor);
+		panelPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				agregarVertice(e);
 			}
 		});
@@ -32,21 +32,27 @@ public class VisorGrafo {
 
 	private void agregarVertice(MouseEvent e) {
 		String ID = "";
-		ID = (String) JOptionPane.showInputDialog(mainPanel, "Ingrese el nombre:", "Nombre del vértice",
-				JOptionPane.PLAIN_MESSAGE, null, null, ID);
-		if (!(ID.equals(""))) {
-			System.out.println("Entro");
+		ID = (String) JOptionPane.showInputDialog(
+				panelPrincipal,
+				"Ingrese el nombre:",
+				"Nombre del vértice",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				null, 
+				ID);
+		if (ID != null &&  !ID.isEmpty()) {
 			FormaVertice vertice = new FormaVertice(e.getX(), e.getY(), ID);
-			mainPanel.add(vertice);
-			mainPanel.setComponentZOrder(vertice, 0);
-			mainPanel.revalidate();
-			mainPanel.repaint();
+			panelPrincipal.add(vertice);
+			panelPrincipal.setComponentZOrder(vertice, 0);
+			panelPrincipal.revalidate();
+			panelPrincipal.repaint();
 		}
-
 	}
 
 	public JPanel getMainPanel() {
-		return this.mainPanel;
+		panelPrincipal = new JPanel();
+		crearPanelPrincipal();
+		return panelPrincipal;
 	}
 
 }

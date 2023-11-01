@@ -1,7 +1,5 @@
 package vista;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -19,6 +17,7 @@ import javax.swing.JTable;
 
 import coordinador.Coordinador;
 import vista.visorGrafo.VisorGrafo;
+import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class VentanaPrincipal extends JFrame {
@@ -28,11 +27,15 @@ public class VentanaPrincipal extends JFrame {
 	private Color colorTextFont;
 	private JTable tbl_Vertices;
 	private AdmTablas admTablas;
+	private VisorGrafo visorGrafo;
 
 	public VentanaPrincipal(Coordinador coordinador) {
+		this.admTablas = new AdmTablas();
+		this.visorGrafo = new VisorGrafo();
 		this.coordinador = coordinador;
 		this.colorTextFont = new Color(111, 145, 173);
 		this.lineBorder = new LineBorder(new Color(39, 57, 88), 1, true);
+
 		setSize(1280, 720);
 		setTitle("Conjunto Dominante Minimo");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/appIcon_32.png")));
@@ -51,11 +54,13 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void agregarVisorGrafo() {
-		VisorGrafo v = new VisorGrafo();
-		JPanel visorGrafo = v.getMainPanel();
-		visorGrafo.setBounds(10, 93, 1000, 577);
-		visorGrafo.setBackground(new Color(255, 0, 0));
-		getContentPane().add(visorGrafo);
+		JPanel panelVisorGrafo = new JPanel();
+		panelVisorGrafo.setBorder(new TitledBorder(lineBorder, "Visor Grafo", TitledBorder.LEFT, TitledBorder.TOP, null, colorTextFont));
+		panelVisorGrafo.setBounds(10, 93, 970, 577);
+		panelVisorGrafo.add(visorGrafo.getMainPanel());
+		panelVisorGrafo.setLayout(new GridLayout(1, 0, 0, 0));
+		getContentPane().add(panelVisorGrafo);
+
 	}
 
 	public void crearBarraHerramientas() {
@@ -67,20 +72,11 @@ public class VentanaPrincipal extends JFrame {
 		toolBar.addSeparator();
 
 		JButton btn_AgregarPersona = new JButton("Agregar Persona");
-		btn_AgregarPersona.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 		btn_AgregarPersona.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/agregarPersona32.png")));
 		btn_AgregarPersona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getSource() == btn_AgregarPersona) {
-					// VentanaAgregarVertice ventana = new VentanaAgregarVertice();
-					// ventana.setVisible(true);
 
-				}
 			}
 		});
 		toolBar.add(btn_AgregarPersona);
@@ -119,7 +115,7 @@ public class VentanaPrincipal extends JFrame {
 		JPanel pnl_Vertices = new JPanel();
 		pnl_Vertices.setBorder(
 				new TitledBorder(lineBorder, "Vertices", TitledBorder.LEFT, TitledBorder.TOP, null, colorTextFont));
-		pnl_Vertices.setBounds(10, 92, 600, 568);
+		pnl_Vertices.setBounds(990, 93, 264, 577);
 		pnl_Vertices.setLayout(null);
 		getContentPane().add(pnl_Vertices);
 
@@ -131,7 +127,7 @@ public class VentanaPrincipal extends JFrame {
 		admTablas.ajustarAnchoColumna(tbl_Vertices, 0, 20);
 
 		JScrollPane spl_TablaVertices = new JScrollPane(tbl_Vertices);
-		spl_TablaVertices.setBounds(10, 20, 580, 538);
+		spl_TablaVertices.setBounds(10, 20, 244, 546);
 		pnl_Vertices.add(spl_TablaVertices);
 	}
 

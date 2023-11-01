@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
-
 @SuppressWarnings("serial")
 public class FormaVertice extends JPanel implements MouseMotionListener {
 	private Color colorDeVertice = Color.decode("#ED94FF");
@@ -24,6 +22,7 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 	public FormaVertice(int x, int y, String ID) {
 		this.ID = ID;
 		setName("Vertice " + ID);
+		setToolTipText("Vertice \n" + ID);
 		setBackground(colorDeVertice);
 		setPreferredSize(new Dimension(V_SIZE, V_SIZE));
 		setLayout(new GridBagLayout());
@@ -32,7 +31,7 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Vertice");
+				System.out.println("Vertice " + ID);
 			}
 		});
 
@@ -65,9 +64,8 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// No se sobreescribe, pero se implementa por la interfaz MouseMotionListener.
-		
 	}
-	
+
 	public String getID() {
 		return this.ID;
 	}
