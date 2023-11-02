@@ -11,12 +11,12 @@ public class PruebaEnunciado {
 	public static void conjuntoDominanteMinimo() {
 		Grafo grafo = new Grafo();
 
-		grafo.agregarVertice("1");
-		grafo.agregarVertice("2");
-		grafo.agregarVertice("3");
-		grafo.agregarVertice("4");
-		grafo.agregarVertice("5");
-		grafo.agregarVertice("6");
+		grafo.agregarVertice(0, 0, "1");
+		grafo.agregarVertice(0, 0, "2");
+		grafo.agregarVertice(0, 0, "3");
+		grafo.agregarVertice(0, 0, "4");
+		grafo.agregarVertice(0, 0, "5");
+		grafo.agregarVertice(0, 0, "6");
 
 		grafo.agregarArista(1, 5);
 		grafo.agregarArista(1, 2);
@@ -25,7 +25,7 @@ public class PruebaEnunciado {
 		grafo.agregarArista(5, 4);
 		grafo.agregarArista(4, 3);
 		grafo.agregarArista(4, 6);
-		
+				
 		Set<Integer> minimumDominatingSet = grafo.obtenerConjuntoDominanteMinimo();
 		System.out.println("Minimum Dominating Set: " + minimumDominatingSet);
 	}

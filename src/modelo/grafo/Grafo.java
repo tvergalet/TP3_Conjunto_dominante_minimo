@@ -1,5 +1,6 @@
 package modelo.grafo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -7,10 +8,11 @@ import java.util.Set;
 public class Grafo {
 	
 	private Map<Integer, Vertice> vertices = new HashMap<>();
-
-	public void agregarVertice(String nombre) {
-		Vertice nuevoVertice = new Vertice(generarIdVertice(), nombre);
+	
+	public Vertice agregarVertice(int posicionX, int posicionY, String nombre) {
+		Vertice nuevoVertice = new Vertice(generarIdVertice(), posicionX, posicionY, nombre);
 		vertices.put(nuevoVertice.id(), nuevoVertice);
+		return nuevoVertice;
 	}
 	
 	public void agregarVertice(Vertice nuevoVertice) {
@@ -26,8 +28,13 @@ public class Grafo {
 		vertices.get(idVerticeDestino).agregarVecino(idVerticeOrigen);
 	}
 
-	public Set<Integer> obtenerVertices() {
+	public Set<Integer> obtenerClaveVertices() {
 		return vertices.keySet();
+	}
+	
+	public ArrayList<Vertice> obtenerListaVertices(){
+		ArrayList<Vertice> listaVertices = new ArrayList<>(vertices.values());
+		return listaVertices;
 	}
 
 	public Set<Integer> obtenerVecinos(int idVerticeConsulta) {
@@ -37,6 +44,5 @@ public class Grafo {
 	public Set<Integer> obtenerConjuntoDominanteMinimo() {
 		return ConjuntoDominanteMinimo.buscarConjuntoDominanteMinimo(this);
 	}
-	
 	
 }

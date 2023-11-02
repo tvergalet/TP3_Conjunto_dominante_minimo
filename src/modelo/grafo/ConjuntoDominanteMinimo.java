@@ -9,7 +9,7 @@ class ConjuntoDominanteMinimo {
 	
 	public static Set<Integer> buscarConjuntoDominanteMinimo(Grafo grafo) {
 		Set<Integer> conjuntoDominante = new HashSet<>();
-		List<Integer> vertices = new ArrayList<>(grafo.obtenerVertices());
+		List<Integer> vertices = new ArrayList<>(grafo.obtenerClaveVertices());
 
 		while (!vertices.isEmpty()) {
 			int mejorVertice = buscarMejorVertice(vertices, conjuntoDominante, grafo);

@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,12 +16,12 @@ public class AdmBaseDatos {
 
 	private String bd_Vertices = "src/bd/vertice.json";
 		
-	public Set<Vertice> obtenerVertices() {
+	public ArrayList<Vertice> obtenerVertices() {
 		
-        Set<Vertice> listaVertices = new HashSet<Vertice>();
+		ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(bd_Vertices));
-            Type tipoListaVertices = new TypeToken<Set<Vertice>>() {}.getType();
+            Type tipoListaVertices = new TypeToken<ArrayList<Vertice>>() {}.getType();
 
             listaVertices = new Gson().fromJson(bufferedReader, tipoListaVertices);
 
@@ -34,7 +33,7 @@ public class AdmBaseDatos {
         return listaVertices;
 	}
 	
-	public void guardarVertices(Set<Vertice> vertices) {
+	public void guardarVertices(ArrayList<Vertice> vertices) {
 		try( FileWriter fileWriter = new FileWriter(bd_Vertices) ){
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			fileWriter.write(gson.toJson(vertices));

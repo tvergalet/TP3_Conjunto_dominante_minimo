@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import coordinador.Coordinador;
 import modelo.grafo.Grafo;
@@ -25,11 +24,16 @@ public class Logica {
 		});	
 	}
 		
-	public List<Object[]> convertirListaObject(Set<Vertice> listaVertices) {
+	public List<Object[]> convertirListaObject(ArrayList<Vertice> listaVertices) {
 		List<Object[]> verticesFormateado = new ArrayList<>();
 		
 		listaVertices.forEach( vertice -> {
-        	verticesFormateado.add(new Object[] { vertice.id(), vertice.vecinos().toString() });
+        	verticesFormateado.add(new Object[] { 
+        			vertice.id(),
+        			vertice.nombre(),
+        			vertice.posX(),
+        			vertice.posY(),
+        			vertice.vecinos().toString()});
         });
 		
 		return verticesFormateado;
@@ -37,6 +41,14 @@ public class Logica {
 
 	public String conjuntoDominanteMinimo() {
 		return grafo.obtenerConjuntoDominanteMinimo().toString();
+	}
+
+	public Vertice agregarVertice(int x, int y, String nombre) {
+		return grafo.agregarVertice(x, y, nombre);	
+	}
+
+	public ArrayList<Vertice> obtenerVertices() {
+		return grafo.obtenerListaVertices();
 	}
 
 }

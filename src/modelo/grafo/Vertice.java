@@ -13,10 +13,16 @@ public class Vertice {
 	private String nombre;
 	@SerializedName("Vecinos")
 	private Set<Integer> vecinos;
+	@SerializedName("Posicion X")
+	private int posX;
+	@SerializedName("Posicion Y")
+	private int posY;
 	
-	public Vertice(int id, String nombre) {
+	public Vertice(int id, int posicionX, int posicionY, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
+		this.posX = posicionX;
+		this.posY = posicionY;
 		this.vecinos = new HashSet<>();
 	}
 	
@@ -26,6 +32,14 @@ public class Vertice {
 	
 	public String nombre() {
 		return this.nombre;
+	}
+	
+	public int posX() {
+		return this.posX;
+	}
+
+	public int posY() {
+		return this.posY;
 	}
 	
 	public Set<Integer> vecinos() {

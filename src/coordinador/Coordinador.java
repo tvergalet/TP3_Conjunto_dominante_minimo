@@ -1,7 +1,7 @@
 package coordinador;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import bd.AdmBaseDatos;
 import modelo.Logica;
@@ -31,7 +31,7 @@ public class Coordinador {
 		this.vEmergente = ventanaEmergente;
 	}
 	
-	public void mostrarVentanaEmergente() {
+	public void mostrarConjuntoDominanteMinimo() {
 		if(!hayDosVentanasAbiertas)
 			vEmergente.mostrarVentana("Conjunto Dominante Minimo", logica.conjuntoDominanteMinimo());
 	}
@@ -41,12 +41,25 @@ public class Coordinador {
 		vEmergente.cerrarVentana();
 	}
 
+	// BORRAR CUANDO ELIMINEMOS LA TABLA DE LA VENTANA PRINCIPAL
 	public List<Object[]> obtenerVerticesEnLista() {
 		return logica.convertirListaObject( obtenerVerticesDesdeBD() );
 	}
 	
-	public Set<Vertice> obtenerVerticesDesdeBD() {
+	public ArrayList<Vertice> obtenerVerticesDesdeBD() {
 		return admBD.obtenerVertices();
+	}
+	
+	public ArrayList<Vertice> obtenerVerticesDesdeGrafo(){
+		return logica.obtenerVertices();
+	}
+	
+	public Vertice agregarVertice(int x, int y, String nombre) {
+		return logica.agregarVertice(x, y, nombre);
+	}
+
+	public void guardarVertices() {
+		admBD.guardarVertices(logica.obtenerVertices());
 	}
 
 }

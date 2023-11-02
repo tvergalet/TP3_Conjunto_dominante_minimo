@@ -29,11 +29,15 @@ public class Principal {
 	private void iniciar() {
 		// Se instancian las clases y se relacionan con el coordinador.
 		coordinador = new Coordinador();
+		
 		admBD = new AdmBaseDatos();
 		coordinador.setAdministradorBD(admBD);
+		
 		logica = new Logica(coordinador);
 		coordinador.setLogica(logica);
+		
 		vPrincipal = new VentanaPrincipal(coordinador);
+		
 		vEmergente = new VentanaEmergente(coordinador);
 		coordinador.setVentanaEmergente(vEmergente);
 
