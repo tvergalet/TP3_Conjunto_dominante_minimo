@@ -54,5 +54,10 @@ public class Vertice {
 	public String toString() {
 		return "{Id: " + id + ", Nombre: " + nombre + " - Vecinos: " + vecinos + "}";
 	}
+
+	public void actualizarPosicion(int posicionX, int posicionY) {
+		this.posX = posicionX;
+		this.posY = posicionY;
+	}
 	
 }

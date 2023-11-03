@@ -6,8 +6,8 @@
       2,
       5
     ],
-    "Posicion X": 294,
-    "Posicion Y": 129
+    "Posicion X": 699,
+    "Posicion Y": 226
   },
   {
     "Id": 2,
@@ -17,8 +17,8 @@
       3,
       5
     ],
-    "Posicion X": 505,
-    "Posicion Y": 127
+    "Posicion X": 586,
+    "Posicion Y": 316
   },
   {
     "Id": 3,
@@ -27,8 +27,8 @@
       2,
       4
     ],
-    "Posicion X": 603,
-    "Posicion Y": 260
+    "Posicion X": 431,
+    "Posicion Y": 317
   },
   {
     "Id": 4,
@@ -38,8 +38,8 @@
       5,
       6
     ],
-    "Posicion X": 478,
-    "Posicion Y": 401
+    "Posicion X": 428,
+    "Posicion Y": 164
   },
   {
     "Id": 5,
@@ -49,8 +49,8 @@
       2,
       4
     ],
-    "Posicion X": 269,
-    "Posicion Y": 405
+    "Posicion X": 579,
+    "Posicion Y": 160
   },
   {
     "Id": 6,
@@ -58,7 +58,7 @@
     "Vecinos": [
       4
     ],
-    "Posicion X": 165,
-    "Posicion Y": 245
+    "Posicion X": 300,
+    "Posicion Y": 78
   }
 ]

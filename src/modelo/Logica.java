@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import coordinador.Coordinador;
 import modelo.grafo.Grafo;
@@ -39,16 +40,20 @@ public class Logica {
 		return verticesFormateado;
 	}
 
-	public String conjuntoDominanteMinimo() {
-		return grafo.obtenerConjuntoDominanteMinimo().toString();
+	public Set<Integer> obtenerConjuntoDominanteMinimo() {
+		return grafo.obtenerConjuntoDominanteMinimo();
 	}
 
-	public Vertice agregarVertice(int x, int y, String nombre) {
-		return grafo.agregarVertice(x, y, nombre);	
+	public Vertice agregarVertice(int id, int x, int y, String nombre) {
+		return grafo.agregarVertice(id, x, y, nombre);	
 	}
 
 	public ArrayList<Vertice> obtenerVertices() {
 		return grafo.obtenerListaVertices();
+	}
+
+	public void actualizarPosicionVertice(int id, int posicionX, int posicionY) {
+		grafo.actualizarPosicionVertice(id, posicionX, posicionY);		
 	}
 
 }

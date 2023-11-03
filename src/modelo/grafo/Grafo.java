@@ -9,18 +9,14 @@ public class Grafo {
 	
 	private Map<Integer, Vertice> vertices = new HashMap<>();
 	
-	public Vertice agregarVertice(int posicionX, int posicionY, String nombre) {
-		Vertice nuevoVertice = new Vertice(generarIdVertice(), posicionX, posicionY, nombre);
+	public Vertice agregarVertice(int id, int posicionX, int posicionY, String nombre) {
+		Vertice nuevoVertice = new Vertice(id, posicionX, posicionY, nombre);
 		vertices.put(nuevoVertice.id(), nuevoVertice);
 		return nuevoVertice;
 	}
 	
 	public void agregarVertice(Vertice nuevoVertice) {
 		vertices.put(nuevoVertice.id(), nuevoVertice);
-	}
-	
-	private int generarIdVertice() {
-		return vertices.size()+1;
 	}
 
 	public void agregarArista(int idVerticeOrigen, int idVerticeDestino) {
@@ -43,6 +39,14 @@ public class Grafo {
 	
 	public Set<Integer> obtenerConjuntoDominanteMinimo() {
 		return ConjuntoDominanteMinimo.buscarConjuntoDominanteMinimo(this);
+	}
+
+	public void actualizarPosicionVertice(int id, int posicionX, int posicionY) {
+		if(vertices.containsKey(id)) {
+			Vertice verticePorModificar = vertices.get(id);
+			verticePorModificar.actualizarPosicion(posicionX, posicionY);
+			vertices.put(id, verticePorModificar);
+		}
 	}
 	
 }

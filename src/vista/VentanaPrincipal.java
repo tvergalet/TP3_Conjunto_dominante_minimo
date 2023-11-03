@@ -47,7 +47,7 @@ public class VentanaPrincipal extends JFrame {
 		setVisible(true);
 	}
 
-	public void agregarVisorGrafo() {		
+	private void agregarVisorGrafo() {		
 		JPanel panelVisorGrafo = new JPanel();
 		panelVisorGrafo.setBorder(new TitledBorder(lineBorder, "Visor Grafo", TitledBorder.LEFT, TitledBorder.TOP, null, colorTextFont));
 		panelVisorGrafo.setBounds(10, 93, 1246, 577);
@@ -65,28 +65,6 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().add(toolBar);
 		toolBar.addSeparator();
 
-		JButton btn_AgregarVertice = new JButton("Agregar Vertice");
-		btn_AgregarVertice.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/agregarPersona32.png")));
-		btn_AgregarVertice.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// DESARROLLAR CODIGO
-			}
-		});
-		toolBar.add(btn_AgregarVertice);
-		toolBar.addSeparator();
-
-		JButton btn_AgregarArista = new JButton("Agregar Arista");
-		btn_AgregarArista.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/crearVinculo32.png")));
-		btn_AgregarArista.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// DESARROLLAR CODIGO
-			}
-		});
-		toolBar.add(btn_AgregarArista);
-		toolBar.addSeparator();
-
 		JButton btn_ConjuntoDominanteMinimo = new JButton("Obtener Conjunto Dominante Minimo");
 		btn_ConjuntoDominanteMinimo
 				.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/advertencia_32.png")));
@@ -94,6 +72,7 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				coordinador.mostrarConjuntoDominanteMinimo();
+				visorGrafo.resaltarVertices(coordinador.obtenerConjuntoDominanteMinimo());
 			}
 		});
 		toolBar.add(btn_ConjuntoDominanteMinimo);

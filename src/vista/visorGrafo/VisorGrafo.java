@@ -3,6 +3,7 @@ package vista.visorGrafo;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,12 +15,12 @@ public class VisorGrafo {
 
 	private Coordinador coordinador;
 	private JPanel panelPrincipal;
-	private Color backgroudColor;
+	private Color fondoPanel;
 
 	public VisorGrafo(Coordinador coordinador) {
 		this.coordinador = coordinador;
 		this.panelPrincipal = new JPanel();
-		this.backgroudColor = new Color(41, 58, 86);
+		this.fondoPanel = new Color(41, 58, 86);
 		
 		crearPanelPrincipal();
 		agregarVerticesPrecargados();
@@ -27,7 +28,7 @@ public class VisorGrafo {
 
 	private void crearPanelPrincipal() {
 		panelPrincipal.setLayout(null);
-		panelPrincipal.setBackground(backgroudColor);
+		panelPrincipal.setBackground(fondoPanel);
 		panelPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -37,17 +38,11 @@ public class VisorGrafo {
 	}
 
 	private void agregarVertice(MouseEvent e) {
-		String inputNombre = "";
-		inputNombre = (String) JOptionPane.showInputDialog(
-				panelPrincipal,
-				"Ingrese el nombre:",
-				"Nombre del vértice",
-				JOptionPane.PLAIN_MESSAGE,
-				null,
-				null, 
-				inputNombre);
-		if (inputNombre != null &&  !inputNombre.isEmpty()) {
-			Vertice vertice =  coordinador.agregarVertice(e.getX(), e.getY(), inputNombre);
+		String nombre = solicitarEntradaUsuario("Ingrese el nombre:", "Nombre del vértice" );
+		int idComponente = panelPrincipal.getComponentCount();
+		
+		if (nombre != null &&  !nombre.isEmpty()) {
+			Vertice vertice =  coordinador.agregarVertice(idComponente, e.getX(), e.getY(), nombre);
 			if(vertice != null) {
 				agregarVertice(vertice);
 			} else {
@@ -57,6 +52,12 @@ public class VisorGrafo {
 		}
 	}
 	
+	private String solicitarEntradaUsuario(String tituloVentana, String mensaje) {
+		String input = "";
+		input = (String) JOptionPane.showInputDialog(panelPrincipal, tituloVentana, mensaje, JOptionPane.PLAIN_MESSAGE, null, null, input);
+		return input;
+	}
+
 	private void agregarVerticesPrecargados() {
 		coordinador.obtenerVerticesDesdeGrafo().forEach( vertice ->{
 			agregarVertice(vertice);
@@ -65,6 +66,7 @@ public class VisorGrafo {
 	
 	public void agregarVertice(Vertice vertice) {
 		FormaVertice formaVertice = new FormaVertice(
+				coordinador,
 				vertice.id(),
 				vertice.posX(),
 				vertice.posY(),
@@ -79,6 +81,13 @@ public class VisorGrafo {
 
 	public JPanel obtenerPanelPrincipal() {
 		return panelPrincipal;
+	}
+
+	public void resaltarVertices(Set<Integer> conjuntoDominanteMinimo) {
+		conjuntoDominanteMinimo.forEach( id -> {
+			((FormaVertice) panelPrincipal.getComponent(id)).cambiarColorVertice();
+		});
+		panelPrincipal.repaint();
 	}
 
 }

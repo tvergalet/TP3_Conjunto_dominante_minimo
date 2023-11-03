@@ -2,6 +2,7 @@ package coordinador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import bd.AdmBaseDatos;
 import modelo.Logica;
@@ -33,7 +34,11 @@ public class Coordinador {
 	
 	public void mostrarConjuntoDominanteMinimo() {
 		if(!hayDosVentanasAbiertas)
-			vEmergente.mostrarVentana("Conjunto Dominante Minimo", logica.conjuntoDominanteMinimo());
+			vEmergente.mostrarVentana("Conjunto Dominante Minimo", obtenerConjuntoDominanteMinimo().toString());
+	}
+	
+	public Set<Integer> obtenerConjuntoDominanteMinimo(){
+		return logica.obtenerConjuntoDominanteMinimo();
 	}
 	
 	public void cerrarVentanaEmergente() {
@@ -54,12 +59,16 @@ public class Coordinador {
 		return logica.obtenerVertices();
 	}
 	
-	public Vertice agregarVertice(int x, int y, String nombre) {
-		return logica.agregarVertice(x, y, nombre);
+	public Vertice agregarVertice(int id, int x, int y, String nombre) {
+		return logica.agregarVertice(id, x, y, nombre);
 	}
 
 	public void guardarVertices() {
 		admBD.guardarVertices(logica.obtenerVertices());
 	}
 
+	public void actualizarPosicionVertice(int id, int posicionX, int posicionY) {
+		logica.actualizarPosicionVertice(id, posicionX, posicionY);
+	}
+	
 }

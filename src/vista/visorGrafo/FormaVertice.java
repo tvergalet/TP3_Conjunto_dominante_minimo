@@ -13,30 +13,37 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import coordinador.Coordinador;
+
 @SuppressWarnings("serial")
 public class FormaVertice extends JPanel implements MouseMotionListener {
-	private Color colorFondo = Color.decode("#ED94FF");
-	private int tamanio = 50;
 	
-	private int id, posX, posY;
+	private Coordinador coordinador;
+	private Color colorFondoNormal, colorFondoResaltado;
+	private int id, posX, posY, tamanio;
 	private String nombre, vecinos;
 	
-
-	public FormaVertice(int id, int posX, int posY, String nombre, String vecinos) {
+	
+	public FormaVertice(Coordinador coordinador, int id, int posX, int posY, String nombre, String vecinos) {
+		this.coordinador = coordinador;
 		this.id = id;
 		this.posX = posX;
 		this.posY = posY;
+		this.tamanio = 50;
 		this.nombre = nombre;
 		this.vecinos = vecinos;
+		this.colorFondoNormal = Color.decode("#ED94FF");
+		this.colorFondoResaltado = Color.decode("#03fc77");
 		
 		asignarAtributos();
-		agregarEventoClic();
+		agregarEventos();
 		agregarTitulo();
 	}
 	
 	private void asignarAtributos() {
 		setToolTipText(generarDescripcion());
-		setBackground(colorFondo);
+		setName("Vertice: " + id);
+		setBackground(colorFondoNormal);
 		setPreferredSize(new Dimension(tamanio, tamanio));
 		setLayout(new GridBagLayout());
 		setBounds(posX - tamanio / 2, posY - tamanio / 2, tamanio, tamanio);
@@ -46,33 +53,37 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 	
 	private String generarDescripcion() {
 		StringBuilder descripcion = new StringBuilder();
-		descripcion.append("Vertice " + id + "\n");
+		descripcion.append("Id: " + id + "\n");
 		descripcion.append("Nombre: " + nombre + "\n");
 		descripcion.append("Vecinos: " + vecinos);
 		return descripcion.toString();
 	}
 	
-	private void agregarEventoClic() {
+	private void agregarEventos() {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Vertice " + nombre);
+				System.out.println("Vertice "+ id);
 			}
 		});
 	}
 	
 	private void agregarTitulo() {
 		JLabel titulo = new JLabel(String.valueOf(id));
-		titulo.setName("VerticeLabel: " + id);
 		titulo.setForeground(Color.BLACK);
 		add(titulo);
+	}
+	
+	public void cambiarColorVertice() {
+		this.colorFondoNormal = colorFondoResaltado;
+		repaint();
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
 		// Dibuja en pantalla un circulo que representa el vertice
 		super.paintComponent(g);
-		g.setColor(colorFondo);
+		g.setColor(colorFondoNormal);
 		g.fillOval(0, 0, tamanio, tamanio);
 		g.setColor(Color.BLACK);
 		g.drawOval(0, 0, tamanio, tamanio);
@@ -85,6 +96,7 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 		int x = nuevoPunto.x - tamanio / 2;
 		int y = nuevoPunto.y - tamanio / 2;
 		setLocation(x, y);
+		coordinador.actualizarPosicionVertice(this.id, x, y);
 		repaint();
 	}
 

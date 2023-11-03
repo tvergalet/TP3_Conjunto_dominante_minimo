@@ -11,12 +11,12 @@ public class PruebaEnunciado {
 	public static void conjuntoDominanteMinimo() {
 		Grafo grafo = new Grafo();
 
-		grafo.agregarVertice(0, 0, "1");
-		grafo.agregarVertice(0, 0, "2");
-		grafo.agregarVertice(0, 0, "3");
-		grafo.agregarVertice(0, 0, "4");
-		grafo.agregarVertice(0, 0, "5");
-		grafo.agregarVertice(0, 0, "6");
+		grafo.agregarVertice(0, 0, 0, "1");
+		grafo.agregarVertice(1, 0, 0, "2");
+		grafo.agregarVertice(2, 0, 0, "3");
+		grafo.agregarVertice(3, 0, 0, "4");
+		grafo.agregarVertice(4, 0, 0, "5");
+		grafo.agregarVertice(5, 0, 0, "6");
 
 		grafo.agregarArista(1, 5);
 		grafo.agregarArista(1, 2);
