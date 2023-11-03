@@ -70,5 +70,9 @@ public class Coordinador {
 	public void actualizarPosicionVertice(int id, int posicionX, int posicionY) {
 		logica.actualizarPosicionVertice(id, posicionX, posicionY);
 	}
+
+	public Vertice obtenerVertice(int id) {
+		return logica.obtenerVertice(id);
+	}
 	
 }

@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 
 		setSize(1280, 720);
 		setTitle("Conjunto Dominante Minimo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/appIcon_32.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/appIcon.png")));
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,9 +65,33 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().add(toolBar);
 		toolBar.addSeparator();
 
+		JButton btn_GuardarCambios = new JButton();
+		btn_GuardarCambios.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/guardarCambios.png")));
+		btn_GuardarCambios.setToolTipText("Guardar Cambios");
+		btn_GuardarCambios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				coordinador.guardarVertices();
+			}
+		});
+		toolBar.add(btn_GuardarCambios);
+		toolBar.addSeparator();
+		
+		JButton btn_DeshacerCambios = new JButton();
+		btn_DeshacerCambios.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/deshacerCambios.png")));
+		btn_DeshacerCambios.setToolTipText("Deshacer Cambios");
+		btn_DeshacerCambios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				visorGrafo.agregarVerticesPrecargados();
+			}
+		});
+		toolBar.add(btn_DeshacerCambios);
+		toolBar.addSeparator();
+		
 		JButton btn_ConjuntoDominanteMinimo = new JButton("Obtener Conjunto Dominante Minimo");
 		btn_ConjuntoDominanteMinimo
-				.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/advertencia_32.png")));
+				.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/conjuntoDominanteMinimo.png")));
 		btn_ConjuntoDominanteMinimo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -77,17 +101,6 @@ public class VentanaPrincipal extends JFrame {
 		});
 		toolBar.add(btn_ConjuntoDominanteMinimo);
 		toolBar.addSeparator();
-		
-		JButton btn_GuardarModificaciones = new JButton("Guardar Modificaciones");
-		btn_GuardarModificaciones.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/crearVinculo32.png")));
-		btn_GuardarModificaciones.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				coordinador.guardarVertices();
-			}
-		});
-		toolBar.add(btn_GuardarModificaciones);
-		toolBar.addSeparator();
-	}
 
+	}
 }

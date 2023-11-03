@@ -58,7 +58,10 @@ public class VisorGrafo {
 		return input;
 	}
 
-	private void agregarVerticesPrecargados() {
+	public void agregarVerticesPrecargados() {
+		if(panelPrincipal.getComponentCount() > 0) {
+			panelPrincipal.removeAll();
+		}
 		coordinador.obtenerVerticesDesdeGrafo().forEach( vertice ->{
 			agregarVertice(vertice);
 		});

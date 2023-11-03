@@ -56,4 +56,8 @@ public class Logica {
 		grafo.actualizarPosicionVertice(id, posicionX, posicionY);		
 	}
 
+	public Vertice obtenerVertice(int id) {
+		return grafo.obtenerVertice(id);
+	}
+
 }

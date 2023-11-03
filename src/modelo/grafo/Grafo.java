@@ -48,5 +48,9 @@ public class Grafo {
 			vertices.put(id, verticePorModificar);
 		}
 	}
+
+	public Vertice obtenerVertice(int id) {
+		return vertices.get(id);
+	}
 	
 }

@@ -1,10 +1,9 @@
 package vista;
 
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
-import javax.swing.JTextPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -20,15 +19,14 @@ import java.awt.Color;
 public class VentanaEmergente extends JFrame {
 
 	private Coordinador coordinador;
-	private JLabel lbl_Titulo;
-	private JTextPane txt_Mensaje;
+	private JLabel lbl_Titulo; 
+	private JTextField lbl_Mensaje;
 	private Color colorBorde;
 
 	public VentanaEmergente(Coordinador coord) {	
 		coordinador = coord;
 		colorBorde = new Color(39, 57, 88);
-		setSize(515, 200);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/advertencia_32.png")));
+		setSize(500, 110);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -39,15 +37,20 @@ public class VentanaEmergente extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		lbl_Titulo = new JLabel("New label");
+		lbl_Titulo = new JLabel("Titulo");
 		lbl_Titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lbl_Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_Titulo.setBounds(10, 10, 495, 21);
+		lbl_Titulo.setBounds(10, 10, 480, 21);
 		panel.add(lbl_Titulo);
 		
-		txt_Mensaje = new JTextPane();
-		txt_Mensaje.setBounds(10, 41, 495, 101);
-		panel.add(txt_Mensaje);
+		lbl_Mensaje = new JTextField("Mensaje");
+		lbl_Mensaje.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbl_Mensaje.setForeground(new Color(0, 0, 0));
+		lbl_Mensaje.setBounds(10, 35, 480, 29);
+		lbl_Mensaje.setEditable(false);
+		lbl_Mensaje.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_Mensaje.setBackground(new Color(255, 255, 255));
+		panel.add(lbl_Mensaje);
 		
 		JButton btn_Cerrar = new JButton("Cerrar");
 		btn_Cerrar.addMouseListener(new MouseAdapter() {
@@ -56,8 +59,8 @@ public class VentanaEmergente extends JFrame {
 				coordinador.cerrarVentanaEmergente();
 			}
 		});
-		btn_Cerrar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btn_Cerrar.setBounds(202, 154, 105, 29);
+		btn_Cerrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btn_Cerrar.setBounds(208, 71, 80, 29);
 		panel.add(btn_Cerrar);
 				
 	}
@@ -74,7 +77,7 @@ public class VentanaEmergente extends JFrame {
 	}
 	
 	private void establecerMensaje(String mensaje) {
-		txt_Mensaje.setText(mensaje);
+		lbl_Mensaje.setText(mensaje);
 	}
 	
 	public void cerrarVentana() {
