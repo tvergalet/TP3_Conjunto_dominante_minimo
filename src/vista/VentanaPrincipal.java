@@ -83,7 +83,7 @@ public class VentanaPrincipal extends JFrame {
 		btn_DeshacerCambios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				visorGrafo.agregarVerticesPrecargados();
+				actualizarVerticesDesdeBase();
 			}
 		});
 		toolBar.add(btn_DeshacerCambios);
@@ -101,6 +101,9 @@ public class VentanaPrincipal extends JFrame {
 		});
 		toolBar.add(btn_ConjuntoDominanteMinimo);
 		toolBar.addSeparator();
-
+	}
+	
+	public void actualizarVerticesDesdeBase() {
+		visorGrafo.actualizarVerticesDesdeBase();
 	}
 }

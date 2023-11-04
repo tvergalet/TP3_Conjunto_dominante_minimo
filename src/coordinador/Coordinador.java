@@ -8,12 +8,14 @@ import bd.AdmBaseDatos;
 import modelo.Logica;
 import modelo.grafo.Vertice;
 import vista.VentanaEmergente;
+import vista.VentanaPrincipal;
 
 public class Coordinador {
 
 	private Logica logica;
 	private AdmBaseDatos admBD;
 	private VentanaEmergente vEmergente;
+	private VentanaPrincipal vPrincipal;
 	private boolean hayDosVentanasAbiertas;
 	
 	public Coordinador() {
@@ -30,6 +32,10 @@ public class Coordinador {
 	
 	public void setVentanaEmergente(VentanaEmergente ventanaEmergente) {
 		this.vEmergente = ventanaEmergente;
+	}
+	
+	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+		this.vPrincipal = ventanaPrincipal;
 	}
 	
 	public void mostrarConjuntoDominanteMinimo() {
@@ -73,6 +79,11 @@ public class Coordinador {
 
 	public Vertice obtenerVertice(int id) {
 		return logica.obtenerVertice(id);
+	}
+
+	public void eliminarVertice(int id) {
+		 logica.eliminarVertice(id);
+		 vPrincipal.actualizarVerticesDesdeBase();
 	}
 	
 }

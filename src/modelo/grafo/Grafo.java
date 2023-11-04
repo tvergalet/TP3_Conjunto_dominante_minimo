@@ -52,5 +52,9 @@ public class Grafo {
 	public Vertice obtenerVertice(int id) {
 		return vertices.get(id);
 	}
+
+	public void eliminarVertice(int id) {
+		vertices.remove(id);
+	}
 	
 }

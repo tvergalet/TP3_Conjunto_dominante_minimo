@@ -87,7 +87,17 @@ public class VentanaEditarVertice extends JFrame {
 
 	private JPanel panelEliminar() {
 		JPanel panel = new JPanel();
-		// GENERAR MENU PARA ELIMINAR
+		
+		JButton btn_Eliminar = new JButton("Eliminar vertice");
+		btn_Eliminar.setBounds(20, 20, 50, 22);
+		btn_Eliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				coordinador.eliminarVertice(vertice.id());
+			}
+		});
+		panel.add(btn_Eliminar);
+		
 		return panel;
 	}
 

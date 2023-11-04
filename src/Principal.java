@@ -37,6 +37,7 @@ public class Principal {
 		coordinador.setLogica(logica);
 		
 		vPrincipal = new VentanaPrincipal(coordinador);
+		coordinador.setVentanaPrincipal(vPrincipal);
 		
 		vEmergente = new VentanaEmergente(coordinador);
 		coordinador.setVentanaEmergente(vEmergente);

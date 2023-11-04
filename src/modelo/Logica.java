@@ -60,4 +60,8 @@ public class Logica {
 		return grafo.obtenerVertice(id);
 	}
 
+	public void eliminarVertice(int id) {
+		grafo.eliminarVertice(id);
+	}
+
 }

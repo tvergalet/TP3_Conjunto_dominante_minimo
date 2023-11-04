@@ -23,7 +23,7 @@ public class VisorGrafo {
 		this.fondoPanel = new Color(41, 58, 86);
 		
 		crearPanelPrincipal();
-		agregarVerticesPrecargados();
+		actualizarVerticesDesdeBase();
 	}
 
 	private void crearPanelPrincipal() {
@@ -58,7 +58,7 @@ public class VisorGrafo {
 		return input;
 	}
 
-	public void agregarVerticesPrecargados() {
+	public void actualizarVerticesDesdeBase() {
 		if(panelPrincipal.getComponentCount() > 0) {
 			panelPrincipal.removeAll();
 		}
