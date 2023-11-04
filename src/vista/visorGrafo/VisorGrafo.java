@@ -3,6 +3,8 @@ package vista.visorGrafo;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
@@ -16,11 +18,13 @@ public class VisorGrafo {
 	private Coordinador coordinador;
 	private JPanel panelPrincipal;
 	private Color fondoPanel;
+	private Map<Integer, FormaVertice> vertices;
 
 	public VisorGrafo(Coordinador coordinador) {
 		this.coordinador = coordinador;
 		this.panelPrincipal = new JPanel();
 		this.fondoPanel = new Color(41, 58, 86);
+		this.vertices = new HashMap<>();
 		
 		crearPanelPrincipal();
 		actualizarVerticesDesdeBase();
@@ -39,16 +43,14 @@ public class VisorGrafo {
 
 	private void agregarVertice(MouseEvent e) {
 		String nombre = solicitarEntradaUsuario("Ingrese el nombre:", "Nombre del vértice" );
-		int idComponente = panelPrincipal.getComponentCount();
 		
 		if (nombre != null &&  !nombre.isEmpty()) {
-			Vertice vertice =  coordinador.agregarVertice(idComponente, e.getX(), e.getY(), nombre);
+			Vertice vertice =  coordinador.agregarVertice(e.getX(), e.getY(), nombre);
 			if(vertice != null) {
 				agregarVertice(vertice);
 			} else {
-				JOptionPane.showMessageDialog(panelPrincipal, "NO SE PUDO GRAFICAR ARISTA");
+				JOptionPane.showMessageDialog(panelPrincipal, "No se pudo generar el vertice");
 			}
-
 		}
 	}
 	
@@ -67,7 +69,7 @@ public class VisorGrafo {
 		});
 	}
 	
-	public void agregarVertice(Vertice vertice) {
+	private void agregarVertice(Vertice vertice) {
 		FormaVertice formaVertice = new FormaVertice(
 				coordinador,
 				vertice.id(),
@@ -76,6 +78,9 @@ public class VisorGrafo {
 				vertice.nombre(),
 				vertice.vecinos().toString()
 		);
+		
+		vertices.put(formaVertice.id(), formaVertice);
+		
 		panelPrincipal.add(formaVertice);
 		panelPrincipal.setComponentZOrder(formaVertice, 0);
 		panelPrincipal.revalidate();
@@ -88,9 +93,9 @@ public class VisorGrafo {
 
 	public void resaltarVertices(Set<Integer> conjuntoDominanteMinimo) {
 		conjuntoDominanteMinimo.forEach( id -> {
-			((FormaVertice) panelPrincipal.getComponent(id)).cambiarColorVertice();
+			((FormaVertice) vertices.get(id)).cambiarColorVertice();
 		});
 		panelPrincipal.repaint();
 	}
-
+	
 }

@@ -2,16 +2,17 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import coordinador.Coordinador;
 import vista.visorGrafo.VisorGrafo;
@@ -24,6 +25,7 @@ public class VentanaPrincipal extends JFrame {
 	private LineBorder lineBorder;
 	private Color colorTextFont;
 	private VisorGrafo visorGrafo;
+	private JTextField txt_avisos;
 
 	public VentanaPrincipal(Coordinador coordinador) {
 		this.visorGrafo = new VisorGrafo(coordinador);
@@ -41,23 +43,19 @@ public class VentanaPrincipal extends JFrame {
 
 		crearBarraHerramientas();
 		agregarVisorGrafo();
-	}
-
-	public void mostrarVentana() {
-		setVisible(true);
+		crearPanelAvisos();
 	}
 
 	private void agregarVisorGrafo() {		
 		JPanel panelVisorGrafo = new JPanel();
 		panelVisorGrafo.setBorder(new TitledBorder(lineBorder, "Visor Grafo", TitledBorder.LEFT, TitledBorder.TOP, null, colorTextFont));
-		panelVisorGrafo.setBounds(10, 93, 1246, 577);
+		panelVisorGrafo.setBounds(10, 93, 1246, 522);
 		panelVisorGrafo.add(visorGrafo.obtenerPanelPrincipal());
 		panelVisorGrafo.setLayout(new GridLayout(1, 0, 0, 0));
 		getContentPane().add(panelVisorGrafo);
-
 	}
 
-	public void crearBarraHerramientas() {
+	private void crearBarraHerramientas() {
 		JToolBar toolBar = new JToolBar();
 		toolBar.setBorder(new TitledBorder(lineBorder, "Barra de herramientas", TitledBorder.LEFT, TitledBorder.TOP,
 				null, colorTextFont));
@@ -65,45 +63,51 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().add(toolBar);
 		toolBar.addSeparator();
 
-		JButton btn_GuardarCambios = new JButton();
-		btn_GuardarCambios.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/guardarCambios.png")));
+		JButton btn_GuardarCambios = new JButton(new ImageIcon("src/img/guardarCambios.png"));
 		btn_GuardarCambios.setToolTipText("Guardar Cambios");
-		btn_GuardarCambios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				coordinador.guardarVertices();
-			}
-		});
+		btn_GuardarCambios.addActionListener((evento) -> coordinador.guardarVertices());
 		toolBar.add(btn_GuardarCambios);
 		toolBar.addSeparator();
 		
-		JButton btn_DeshacerCambios = new JButton();
-		btn_DeshacerCambios.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/deshacerCambios.png")));
+		JButton btn_DeshacerCambios = new JButton(new ImageIcon("src/img/deshacerCambios.png"));
 		btn_DeshacerCambios.setToolTipText("Deshacer Cambios");
-		btn_DeshacerCambios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				actualizarVerticesDesdeBase();
-			}
-		});
+		btn_DeshacerCambios.addActionListener((evento) -> actualizarVerticesDesdeBase());
 		toolBar.add(btn_DeshacerCambios);
 		toolBar.addSeparator();
 		
-		JButton btn_ConjuntoDominanteMinimo = new JButton("Obtener Conjunto Dominante Minimo");
-		btn_ConjuntoDominanteMinimo
-				.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/conjuntoDominanteMinimo.png")));
-		btn_ConjuntoDominanteMinimo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				coordinador.mostrarConjuntoDominanteMinimo();
-				visorGrafo.resaltarVertices(coordinador.obtenerConjuntoDominanteMinimo());
-			}
+		JButton btn_CDM = new JButton("Conjunto Dominante Minimo", new ImageIcon("src/img/conjuntoDominanteMinimo.png"));
+		btn_CDM.addActionListener((evento) -> {
+			Set<Integer> CDM = coordinador.obtenerConjuntoDominanteMinimo();
+			mostrarAviso("Conjunto Dominante Minimo: " + CDM.toString() );
+			visorGrafo.resaltarVertices(CDM);
 		});
-		toolBar.add(btn_ConjuntoDominanteMinimo);
+		toolBar.add(btn_CDM);
 		toolBar.addSeparator();
+	}
+	
+	private void crearPanelAvisos() {
+		JPanel panelAvisos = new JPanel(new GridLayout(1, 0, 0, 0));
+		panelAvisos.setBorder(new TitledBorder(lineBorder, "Avisos", TitledBorder.LEFT, TitledBorder.TOP, null, colorTextFont));
+		panelAvisos.setBounds(10, 625, 1246, 48);
+		getContentPane().add(panelAvisos);
+		
+		txt_avisos = new JTextField();
+		txt_avisos.setForeground(new Color(255, 255, 255));
+		txt_avisos.setEditable(false);
+		txt_avisos.setHorizontalAlignment(SwingConstants.CENTER);
+		panelAvisos.add(txt_avisos);
+	}
+	
+	public void mostrarVentana() {
+		setVisible(true);
 	}
 	
 	public void actualizarVerticesDesdeBase() {
 		visorGrafo.actualizarVerticesDesdeBase();
 	}
+	
+	public void mostrarAviso(String aviso) {
+		txt_avisos.setText(aviso);
+	}
+
 }

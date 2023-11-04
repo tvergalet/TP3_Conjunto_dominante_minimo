@@ -1,26 +1,18 @@
 package coordinador;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import bd.AdmBaseDatos;
 import modelo.Logica;
 import modelo.grafo.Vertice;
-import vista.VentanaEmergente;
 import vista.VentanaPrincipal;
 
 public class Coordinador {
 
 	private Logica logica;
 	private AdmBaseDatos admBD;
-	private VentanaEmergente vEmergente;
 	private VentanaPrincipal vPrincipal;
-	private boolean hayDosVentanasAbiertas;
-	
-	public Coordinador() {
-		hayDosVentanasAbiertas = false;
-	}
 
 	public void setLogica(Logica logica) {
 		this.logica = logica;
@@ -30,31 +22,12 @@ public class Coordinador {
 		this.admBD = administradorBaseDatos; 
 	}
 	
-	public void setVentanaEmergente(VentanaEmergente ventanaEmergente) {
-		this.vEmergente = ventanaEmergente;
-	}
-	
 	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
 		this.vPrincipal = ventanaPrincipal;
 	}
-	
-	public void mostrarConjuntoDominanteMinimo() {
-		if(!hayDosVentanasAbiertas)
-			vEmergente.mostrarVentana("Conjunto Dominante Minimo", obtenerConjuntoDominanteMinimo().toString());
-	}
-	
+		
 	public Set<Integer> obtenerConjuntoDominanteMinimo(){
 		return logica.obtenerConjuntoDominanteMinimo();
-	}
-	
-	public void cerrarVentanaEmergente() {
-		hayDosVentanasAbiertas = false;
-		vEmergente.cerrarVentana();
-	}
-
-	// BORRAR CUANDO ELIMINEMOS LA TABLA DE LA VENTANA PRINCIPAL
-	public List<Object[]> obtenerVerticesEnLista() {
-		return logica.convertirListaObject( obtenerVerticesDesdeBD() );
 	}
 	
 	public ArrayList<Vertice> obtenerVerticesDesdeBD() {
@@ -65,8 +38,12 @@ public class Coordinador {
 		return logica.obtenerVertices();
 	}
 	
-	public Vertice agregarVertice(int id, int x, int y, String nombre) {
-		return logica.agregarVertice(id, x, y, nombre);
+	public ArrayList<Integer> obtenerIdVertices(){
+		return logica.obtenerIdVertices();
+	}
+	
+	public Vertice agregarVertice(int x, int y, String nombre) {
+		return logica.agregarVertice(x, y, nombre);
 	}
 
 	public void guardarVertices() {
@@ -84,6 +61,14 @@ public class Coordinador {
 	public void eliminarVertice(int id) {
 		 logica.eliminarVertice(id);
 		 vPrincipal.actualizarVerticesDesdeBase();
+	}
+	
+	public void mostrarAvisoEnVentanaPrincipal(String aviso) {
+		vPrincipal.mostrarAviso(aviso);
+	}
+	
+	public boolean generarArista(int idVerticeOrigen, int idVerticeDestino) {
+		return logica.generarArista(idVerticeOrigen, idVerticeDestino);
 	}
 	
 }

@@ -18,6 +18,7 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class VentanaEmergente extends JFrame {
 
+	@SuppressWarnings("unused")
 	private Coordinador coordinador;
 	private JLabel lbl_Titulo; 
 	private JTextField lbl_Mensaje;
@@ -56,7 +57,7 @@ public class VentanaEmergente extends JFrame {
 		btn_Cerrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				coordinador.cerrarVentanaEmergente();
+				// Metodo para cerrar la ventana
 			}
 		});
 		btn_Cerrar.setFont(new Font("Tahoma", Font.BOLD, 11));

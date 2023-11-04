@@ -6,7 +6,6 @@ import bd.AdmBaseDatos;
 import coordinador.Coordinador;
 import modelo.Logica;
 import vista.VentanaPrincipal;
-import vista.VentanaEmergente;
 
 public class Principal {
 
@@ -14,7 +13,6 @@ public class Principal {
 	private Logica logica;
 	private AdmBaseDatos admBD;
 	private VentanaPrincipal vPrincipal;
-	private VentanaEmergente vEmergente;
 	
 	public static void main(String[] args) {
 		try {
@@ -38,9 +36,6 @@ public class Principal {
 		
 		vPrincipal = new VentanaPrincipal(coordinador);
 		coordinador.setVentanaPrincipal(vPrincipal);
-		
-		vEmergente = new VentanaEmergente(coordinador);
-		coordinador.setVentanaEmergente(vEmergente);
 
 		// Iniciamos la interfaz principal
 		vPrincipal.mostrarVentana();

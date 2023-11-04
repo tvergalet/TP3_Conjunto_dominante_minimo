@@ -106,4 +106,8 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 		// No se sobreescribe, pero se implementa por la interfaz MouseMotionListener.
 	}
 
+	public Integer id() {
+		return id;
+	}
+
 }

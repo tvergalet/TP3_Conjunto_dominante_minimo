@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import coordinador.Coordinador;
@@ -25,31 +24,20 @@ public class Logica {
 		});	
 	}
 		
-	public List<Object[]> convertirListaObject(ArrayList<Vertice> listaVertices) {
-		List<Object[]> verticesFormateado = new ArrayList<>();
-		
-		listaVertices.forEach( vertice -> {
-        	verticesFormateado.add(new Object[] { 
-        			vertice.id(),
-        			vertice.nombre(),
-        			vertice.posX(),
-        			vertice.posY(),
-        			vertice.vecinos().toString()});
-        });
-		
-		return verticesFormateado;
-	}
-
 	public Set<Integer> obtenerConjuntoDominanteMinimo() {
 		return grafo.obtenerConjuntoDominanteMinimo();
 	}
 
-	public Vertice agregarVertice(int id, int x, int y, String nombre) {
-		return grafo.agregarVertice(id, x, y, nombre);	
+	public Vertice agregarVertice(int x, int y, String nombre) {
+		return grafo.agregarVertice(x, y, nombre);	
 	}
 
 	public ArrayList<Vertice> obtenerVertices() {
 		return grafo.obtenerListaVertices();
+	}
+	
+	public ArrayList<Integer> obtenerIdVertices(){
+		return new ArrayList<Integer> (grafo.obtenerClaveVertices());
 	}
 
 	public void actualizarPosicionVertice(int id, int posicionX, int posicionY) {
@@ -62,6 +50,10 @@ public class Logica {
 
 	public void eliminarVertice(int id) {
 		grafo.eliminarVertice(id);
+	}
+
+	public boolean generarArista(int idVerticeOrigen, int idVerticeDestino) {
+		return grafo.agregarArista(idVerticeOrigen, idVerticeDestino);
 	}
 
 }
