@@ -50,14 +50,26 @@ public class Vertice {
 		this.vecinos.add(verticeVecino);
 	}
 	
+	public void eliminarVecino(int verticeVecino) {
+		vecinos.remove(verticeVecino);
+	}
+	
+	public int cantidadVecinos() {
+		return vecinos.size();
+	}
+	
+	public void actualizarPosicion(int posicionX, int posicionY) {
+		this.posX = posicionX;
+		this.posY = posicionY;
+	}
+	
 	@Override
 	public String toString() {
 		return "{Id: " + id + ", Nombre: " + nombre + " - Vecinos: " + vecinos + "}";
 	}
 
-	public void actualizarPosicion(int posicionX, int posicionY) {
-		this.posX = posicionX;
-		this.posY = posicionY;
+	public void actualizarNombre(String nuevoNombre) {
+		this.nombre = nuevoNombre;
 	}
 	
 }

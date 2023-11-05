@@ -63,7 +63,7 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEditarVertice ventanaEditar = new VentanaEditarVertice(coordinador, id);
+				VentanaOpcionesVertice ventanaEditar = new VentanaOpcionesVertice(coordinador, id);
 				ventanaEditar.mostrarVentana();
 			}
 		});

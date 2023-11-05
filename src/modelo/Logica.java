@@ -56,4 +56,8 @@ public class Logica {
 		return grafo.agregarArista(idVerticeOrigen, idVerticeDestino);
 	}
 
+	public void actualizarVertice(Vertice vertice) {
+		grafo.actualizarVertice(vertice);
+	}
+
 }

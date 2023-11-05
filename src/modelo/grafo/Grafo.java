@@ -24,14 +24,16 @@ public class Grafo {
 	}
 
 	public boolean agregarArista(int idVerticeOrigen, int idVerticeDestino) {
-		if(!vertices.containsKey(idVerticeOrigen) || !vertices.containsKey(idVerticeDestino)) {
-			return false;
+		if(existeVertice(idVerticeOrigen) || existeVertice(idVerticeDestino)) {
+			vertices.get(idVerticeOrigen).agregarVecino(idVerticeDestino);
+			vertices.get(idVerticeDestino).agregarVecino(idVerticeOrigen);
+			return true;
 		}
-		
-		vertices.get(idVerticeOrigen).agregarVecino(idVerticeDestino);
-		vertices.get(idVerticeDestino).agregarVecino(idVerticeOrigen);
-		System.out.println(vertices.get(idVerticeOrigen).toString() + "\n" + vertices.get(idVerticeDestino).toString() );
-		return true;
+		return false;
+	}
+	
+	private boolean existeVertice(int idVertice) {
+		return vertices.containsKey(idVertice);
 	}
 
 	public Set<Integer> obtenerClaveVertices() {
@@ -64,7 +66,22 @@ public class Grafo {
 	}
 
 	public void eliminarVertice(int id) {
+		removerVerticeVecino(id);
 		vertices.remove(id);
+	}
+	
+	private void removerVerticeVecino(int idEliminar) {
+		Vertice verticeEliminar = vertices.get(idEliminar);
+		
+		verticeEliminar.vecinos().forEach( idVecino ->{
+			Vertice verticeVecino = vertices.get(idVecino);
+			verticeVecino.vecinos().remove(idEliminar);
+			vertices.put(idVecino, verticeVecino);
+		});
+	}
+
+	public void actualizarVertice(Vertice vertice) {
+		vertices.put(vertice.id(), vertice);
 	}
 	
 }

@@ -45,6 +45,10 @@ public class Coordinador {
 	public Vertice agregarVertice(int x, int y, String nombre) {
 		return logica.agregarVertice(x, y, nombre);
 	}
+	
+	public void actualizarVertice(Vertice vertice) {
+		logica.actualizarVertice(vertice);
+	}
 
 	public void guardarVertices() {
 		admBD.guardarVertices(logica.obtenerVertices());
@@ -60,7 +64,11 @@ public class Coordinador {
 
 	public void eliminarVertice(int id) {
 		 logica.eliminarVertice(id);
-		 vPrincipal.actualizarVerticesDesdeBase();
+		 actualizarVerticesEnVentanaPrincipal();
+	}
+	
+	public void actualizarVerticesEnVentanaPrincipal() {
+		vPrincipal.actualizarVerticesDesdeBase();
 	}
 	
 	public void mostrarAvisoEnVentanaPrincipal(String aviso) {
@@ -70,5 +78,4 @@ public class Coordinador {
 	public boolean generarArista(int idVerticeOrigen, int idVerticeDestino) {
 		return logica.generarArista(idVerticeOrigen, idVerticeDestino);
 	}
-	
 }

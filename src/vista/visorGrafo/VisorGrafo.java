@@ -36,6 +36,7 @@ public class VisorGrafo {
 		panelPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				agregarArista();
 				agregarVertice(e);
 			}
 		});
@@ -69,6 +70,14 @@ public class VisorGrafo {
 		});
 	}
 	
+	private void agregarArista() {
+		FormaArista arista = new FormaArista();
+		panelPrincipal.add(arista);
+		panelPrincipal.repaint();
+		panelPrincipal.setComponentZOrder(arista, 0);
+		arista.repaint();
+	}
+
 	private void agregarVertice(Vertice vertice) {
 		FormaVertice formaVertice = new FormaVertice(
 				coordinador,
