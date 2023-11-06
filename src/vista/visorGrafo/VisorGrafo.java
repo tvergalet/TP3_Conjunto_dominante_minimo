@@ -27,6 +27,7 @@ public class VisorGrafo {
 		this.panelPrincipal = new JPanel();
 		this.fondoPanel = new Color(41, 58, 86);
 		this.vertices = new HashMap<>();
+		this.aristas = new HashMap<>();
 		
 		crearPanelPrincipal();
 		actualizarDesdeBase();
@@ -94,7 +95,6 @@ public class VisorGrafo {
 		
 		aristas.put(arista.idVerticeOrigen(), arista);
 		panelPrincipal.add(arista);
-		panelPrincipal.setComponentZOrder(arista, 1);
 		panelPrincipal.repaint();
 	}
 

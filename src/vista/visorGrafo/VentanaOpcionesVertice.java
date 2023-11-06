@@ -52,7 +52,7 @@ public class VentanaOpcionesVertice extends JFrame {
 		btn_Cerrar.setToolTipText("Cerrar ventana");
 		btn_Cerrar.setBackground(null);
 		btn_Cerrar.setBorder(null);
-		btn_Cerrar.setBounds(321, 11, 23, 21);
+		btn_Cerrar.setBounds(367, 11, 23, 21);
 		btn_Cerrar.addActionListener((evento) -> cerrarVentana());
 		panelPrincipal.add(btn_Cerrar);
 		
@@ -77,45 +77,43 @@ public class VentanaOpcionesVertice extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lbl_Id = new JLabel("Id:");
-		lbl_Id.setLocation(25, 12);
-		lbl_Id.setSize(162, 19);
+		lbl_Id.setLocation(10, 10);
 		panel.add(lbl_Id);
 		
 		JTextField txt_Id = new JTextField( String.valueOf(vertice.id()) );
-		txt_Id.setLocation(121, 10);
+		txt_Id.setLocation(80, 10);
 		panel.add(txt_Id);
 		
 		JLabel lbl_Nombre = new JLabel("Nombre:");
-		lbl_Nombre.setLocation(25, 37);
-		lbl_Nombre.setSize(162, 19);
+		lbl_Nombre.setLocation(10, 40);
 		panel.add(lbl_Nombre);
 		
 		JTextField txt_Nombre = new JTextField( vertice.nombre() );
-		txt_Nombre.setLocation(121, 35);
+		txt_Nombre.setLocation(80, 40);
 		panel.add(txt_Nombre);
 		
 		JLabel lbl_Vecinos = new JLabel("Vecinos:");
-		lbl_Vecinos.setLocation(25, 62);
+		lbl_Vecinos.setLocation(10, 70);
 		panel.add(lbl_Vecinos);
 		
 		JTextField txt_Vecinos = new JTextField( vertice.vecinos().toString() );
-		txt_Vecinos.setLocation(121, 60);
+		txt_Vecinos.setLocation(80, 70);
 		panel.add(txt_Vecinos);
 		
 		JLabel lbl_PosicionX = new JLabel("Posicion X:");
-		lbl_PosicionX.setLocation(25, 88);
+		lbl_PosicionX.setLocation(10, 100);
 		panel.add(lbl_PosicionX);
 		
 		JTextField txt_PosicionX = new JTextField( String.valueOf(vertice.posX()) );
-		txt_PosicionX.setLocation(121, 85);
+		txt_PosicionX.setLocation(80, 100);
 		panel.add(txt_PosicionX);
 		
 		JLabel lbl_PosicionY = new JLabel("Posicion Y:");
-		lbl_PosicionY.setLocation(25, 113);
+		lbl_PosicionY.setLocation(10, 130);
 		panel.add(lbl_PosicionY);
 		
 		JTextField txt_PosicionY = new JTextField( String.valueOf(vertice.posY()) );
-		txt_PosicionY.setLocation(121, 111);
+		txt_PosicionY.setLocation(80, 130);
 		panel.add(txt_PosicionY);
 		
 		// Asignamos los atributos generales/compartidos a los componentes
@@ -123,11 +121,11 @@ public class VentanaOpcionesVertice extends JFrame {
 			if(c instanceof JLabel ) {
 				((JLabel) c).setHorizontalAlignment(SwingConstants.RIGHT);
 				((JLabel) c).setFont(new Font("Tahoma", Font.BOLD, 12));
-				((JLabel) c).setSize(162, 19);
+				((JLabel) c).setSize(71, 25);
 			}
 			if(c instanceof JTextField) {
 				((JTextField) c).setEditable(false);
-				((JTextField) c).setSize(92, 13);
+				((JTextField) c).setSize(286, 25);
 			}
 		}	
 		
@@ -142,16 +140,16 @@ public class VentanaOpcionesVertice extends JFrame {
 		JLabel lbl_Nombre = new JLabel("Nombre:");
 		lbl_Nombre.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_Nombre.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lbl_Nombre.setBounds(88, 7, 51, 15);
+		lbl_Nombre.setBounds(10, 6, 72, 25);
 		panel.add(lbl_Nombre);
 		
 		txt_Nombre = new JTextField( vertice.nombre() );
 		txt_Nombre.setColumns(10);
-		txt_Nombre.setBounds(144, 5, 96, 19);
+		txt_Nombre.setBounds(82, 5, 283, 25);
 		panel.add(txt_Nombre);
 		
 		JButton btn_GuardarCambios = new JButton("Guardar Cambios");
-		btn_GuardarCambios.setBounds(108, 31, 111, 21);
+		btn_GuardarCambios.setBounds(116, 40, 127, 30);
 		btn_GuardarCambios.addActionListener((evento) -> {
 			vertice.actualizarNombre(txt_Nombre.getText());
 			coordinador.actualizarVertice(vertice);
@@ -167,18 +165,18 @@ public class VentanaOpcionesVertice extends JFrame {
 			
 		JComboBox<Integer> listaVertices = new JComboBox<Integer>();
 		listaVertices.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		listaVertices.setBounds(182, 10, 77, 21);
+		listaVertices.setBounds(177, 9, 130, 21);
 		panel.add(listaVertices);
 		
 		JLabel lbl_ListaVertice = new JLabel("Vertice a conectar:");
 		lbl_ListaVertice.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_ListaVertice.setHorizontalAlignment(SwingConstants.LEFT);
-		lbl_ListaVertice.setBounds(63, 13, 121, 13);
+		lbl_ListaVertice.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl_ListaVertice.setBounds(20, 13, 147, 13);
 		panel.add(lbl_ListaVertice);
 		
 		JButton btn_GenerarArista = new JButton("Generar Arista");
 		btn_GenerarArista.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btn_GenerarArista.setBounds(99, 41, 121, 21);
+		btn_GenerarArista.setBounds(112, 41, 147, 28);
 		btn_GenerarArista.addActionListener((evento) -> {
 			int idSeleccionado = (int) listaVertices.getSelectedItem();
 			coordinador.generarArista( vertice.id(), idSeleccionado );
@@ -200,7 +198,7 @@ public class VentanaOpcionesVertice extends JFrame {
 		JPanel panel = new JPanel();
 
 		JButton btn_Eliminar = new JButton("Eliminar vertice");
-		btn_Eliminar.setBounds(101, 10, 122, 21);
+		btn_Eliminar.setBounds(101, 10, 168, 26);
 		btn_Eliminar.addActionListener((evento) -> {
 			coordinador.eliminarVertice( vertice.id() );
 			coordinador.mostrarAvisoEnVentanaPrincipal("Vertice " + vertice.id() + " eliminado");
