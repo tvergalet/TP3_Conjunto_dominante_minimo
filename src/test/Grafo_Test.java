@@ -4,7 +4,6 @@ import modelo.grafo.Grafo;
 import modelo.grafo.Vertice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Grafo_Test {

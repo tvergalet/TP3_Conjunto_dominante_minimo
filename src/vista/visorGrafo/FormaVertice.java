@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,16 +21,16 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 	
 	private Coordinador coordinador;
 	private Color colorFondoNormal, colorFondoResaltado;
-	private int id, posX, posY, tamanio;
-	private String nombre, vecinos;
+	private int id, posX, posY;
+	private String nombre;
+	private Set<Integer> vecinos;
+	private static int tamanio = 50;
 	
-	
-	public FormaVertice(Coordinador coordinador, int id, int posX, int posY, String nombre, String vecinos) {
+	public FormaVertice(Coordinador coordinador, int id, int posX, int posY, String nombre, Set<Integer> vecinos) {
 		this.coordinador = coordinador;
 		this.id = id;
 		this.posX = posX;
 		this.posY = posY;
-		this.tamanio = 50;
 		this.nombre = nombre;
 		this.vecinos = vecinos;
 		this.colorFondoNormal = Color.decode("#ED94FF");
@@ -55,7 +56,7 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 		StringBuilder descripcion = new StringBuilder();
 		descripcion.append("Id: " + id + "\n");
 		descripcion.append("Nombre: " + nombre + "\n");
-		descripcion.append("Vecinos: " + vecinos);
+		descripcion.append("Vecinos: " + vecinos.toString());
 		return descripcion.toString();
 	}
 	
@@ -109,5 +110,20 @@ public class FormaVertice extends JPanel implements MouseMotionListener {
 	public Integer id() {
 		return id;
 	}
+	
+	public Set<Integer> vecinos(){
+		return vecinos;
+	}
+	
+	public int posX() {
+		return posX;
+	}
 
+	public int posY() {
+		return posY;
+	}
+
+	public static int tananio() {
+		return tamanio;
+	}
 }

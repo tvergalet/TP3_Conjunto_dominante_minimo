@@ -26,6 +26,8 @@ public class VentanaPrincipal extends JFrame {
 	private Color colorTextFont;
 	private VisorGrafo visorGrafo;
 	private JTextField txt_avisos;
+	private static int altoVentana = 720;
+	private static int anchoVentana = 1280;
 
 	public VentanaPrincipal(Coordinador coordinador) {
 		this.visorGrafo = new VisorGrafo(coordinador);
@@ -103,11 +105,19 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void actualizarVerticesDesdeBase() {
-		visorGrafo.actualizarVerticesDesdeBase();
+		visorGrafo.actualizarDesdeBase();
 	}
 	
 	public void mostrarAviso(String aviso) {
 		txt_avisos.setText(aviso);
 	}
+	
+	public static int anchoVentana() {
+		return anchoVentana;
+	}
 
+	public static int altoVentana() {
+		return altoVentana;
+	}
+	
 }

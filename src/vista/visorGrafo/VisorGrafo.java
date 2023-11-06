@@ -3,6 +3,7 @@ package vista.visorGrafo;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class VisorGrafo {
 	private JPanel panelPrincipal;
 	private Color fondoPanel;
 	private Map<Integer, FormaVertice> vertices;
+	private Map<Integer, FormaArista> aristas;
 
 	public VisorGrafo(Coordinador coordinador) {
 		this.coordinador = coordinador;
@@ -27,7 +29,7 @@ public class VisorGrafo {
 		this.vertices = new HashMap<>();
 		
 		crearPanelPrincipal();
-		actualizarVerticesDesdeBase();
+		actualizarDesdeBase();
 	}
 
 	private void crearPanelPrincipal() {
@@ -36,7 +38,6 @@ public class VisorGrafo {
 		panelPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				agregarArista();
 				agregarVertice(e);
 			}
 		});
@@ -61,21 +62,40 @@ public class VisorGrafo {
 		return input;
 	}
 
-	public void actualizarVerticesDesdeBase() {
-		if(panelPrincipal.getComponentCount() > 0) {
-			panelPrincipal.removeAll();
-		}
-		coordinador.obtenerVerticesDesdeGrafo().forEach( vertice ->{
+	public void actualizarDesdeBase() {
+		ArrayList<Vertice> listaVertice = coordinador.obtenerVerticesDesdeGrafo();
+		
+		eliminarTodoslosElementos();
+		actualizarVerticesDesdeBD(listaVertice);
+		actualizarAristas();
+	}
+	
+	private void eliminarTodoslosElementos() {
+		panelPrincipal.removeAll();
+	}
+
+	public void actualizarVerticesDesdeBD(ArrayList<Vertice> listaVertice) {
+		listaVertice.forEach( vertice ->{
 			agregarVertice(vertice);
 		});
 	}
 	
-	private void agregarArista() {
-		FormaArista arista = new FormaArista();
+	public void actualizarAristas() {
+		vertices.values().forEach( vertice -> {
+			vertice.vecinos().forEach( idVecino -> {
+				FormaVertice vecino = vertices.get(idVecino);
+				agregarArista(vertice, vecino);
+			});
+		});
+	}
+	
+	private void agregarArista(FormaVertice vertice, FormaVertice vecino) {
+		FormaArista arista = new FormaArista(vertice, vecino);
+		
+		aristas.put(arista.idVerticeOrigen(), arista);
 		panelPrincipal.add(arista);
+		panelPrincipal.setComponentZOrder(arista, 1);
 		panelPrincipal.repaint();
-		panelPrincipal.setComponentZOrder(arista, 0);
-		arista.repaint();
 	}
 
 	private void agregarVertice(Vertice vertice) {
@@ -85,7 +105,7 @@ public class VisorGrafo {
 				vertice.posX(),
 				vertice.posY(),
 				vertice.nombre(),
-				vertice.vecinos().toString()
+				vertice.vecinos()
 		);
 		
 		vertices.put(formaVertice.id(), formaVertice);
