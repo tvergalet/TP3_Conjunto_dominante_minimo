@@ -202,6 +202,7 @@ public class VentanaOpcionesVertice extends JFrame {
 		btn_Eliminar.addActionListener((evento) -> {
 			coordinador.eliminarVertice( vertice.id() );
 			coordinador.mostrarAvisoEnVentanaPrincipal("Vertice " + vertice.id() + " eliminado");
+			coordinador.actualizarVerticesEnVentanaPrincipal();
 			cerrarVentana();
 		});
 		panel.setLayout(null);

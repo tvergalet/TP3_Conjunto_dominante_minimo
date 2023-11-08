@@ -72,6 +72,8 @@ public class VisorGrafo {
 	}
 	
 	private void eliminarTodoslosElementos() {
+		vertices.clear();
+		aristas.clear();
 		panelPrincipal.removeAll();
 	}
 

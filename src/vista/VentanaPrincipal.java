@@ -72,10 +72,10 @@ public class VentanaPrincipal extends JFrame {
 		toolBar.add(btn_GuardarCambios);
 		toolBar.addSeparator();
 
-		JButton btn_DeshacerCambios = new JButton(new ImageIcon("src/img/deshacerCambios.png"));
-		btn_DeshacerCambios.setToolTipText("Deshacer Cambios");
-		btn_DeshacerCambios.addActionListener((evento) -> actualizarVerticesDesdeBase());
-		toolBar.add(btn_DeshacerCambios);
+		JButton btn_ActualizarPantalla = new JButton(new ImageIcon("src/img/deshacerCambios.png"));
+		btn_ActualizarPantalla.setToolTipText("Actualizar Pantalla");
+		btn_ActualizarPantalla.addActionListener((evento) -> actualizarVerticesDesdeBase());
+		toolBar.add(btn_ActualizarPantalla);
 		toolBar.addSeparator();
 
 		JButton btn_CDM = new JButton("Conjunto Dominante Minimo",
